@@ -1,0 +1,109 @@
+# ─────────────────────────────────────────────────────────────
+#  Outreach config. The /outreach setup creates config.yaml from this file by asking you
+#  a few questions, so you never have to edit it by hand (you can if you want to).
+# ─────────────────────────────────────────────────────────────
+
+me:
+  name: ""                         # e.g. Jordan Lee
+  phone: ""                        # e.g. (555) 123-4567
+  email: ""                        # the Outlook address drafts are created in
+  school: ""                       # e.g. State University
+  major: ""                        # e.g. Finance
+  class_year: ""                   # e.g. 2028
+  year_label: ""                   # e.g. sophomore / junior / MBA student / analyst
+  resume_path: ""                  # resume file name in this folder, or a full path ("" = no attachment)
+  # Facts about you that Claude may use to find genuine common ground with each person.
+  # The more you add (hometown, high school, clubs, sports, projects, family background), the better.
+  # /outreach adds new facts here automatically when you mention them.
+  about_me: []
+
+# What you're networking for
+target:
+  field: investment banking        # used in research ("is this person actually in investment banking?")
+  goal: summer 2028 internship     # e.g. "summer 2028 internship", "full-time analyst roles"
+
+availability:
+  - "Monday: 1 pm to 5 pm"
+  - "Wednesday: 2 pm to 5 pm"
+  - "Friday: 1 pm to 5 pm"
+
+# Outlook on the web address.
+#   Work / school Microsoft 365 accounts: https://outlook.office.com/mail/
+#   Personal outlook.com / hotmail accounts: https://outlook.live.com/mail/
+outlook_url: https://outlook.office.com/mail/
+
+# ── Email templates ──────────────────────────────────────────
+# Placeholders: {first_name} {company} {title} {group} {connection} {availability}
+#   plus any field from `me` ({name} {phone} {school} {major} {class_year} {year_label})
+#   and `target` ({field} {goal}); {Field} is the field capitalized, for subject lines.
+# {connection} is written by Claude for each person, so every template must include it.
+#   standard → 1-2 sentences referencing something specific about them
+#   personal → 3-5 sentences that open with what you have in common (used when there's a real link)
+templates:
+  standard:
+    subject: "{school} Student Interested in {Field}"
+    body: |
+      Hi {first_name},
+
+      My name is {name} and I'm a {year_label} at {school} studying {major}.
+
+      I came across your profile while researching {company} and saw that you're a {title} in {group}. I'm interested in {field} for a {goal}, and it would be great to set up some time to learn more about you and your experience at the firm. {connection}
+
+      Happy to work around your schedule, but do any of the below time slots work over the next two weeks?
+
+      {availability}
+
+      I appreciate any help or guidance in advance. My resume is attached for convenience.
+
+      Looking forward to it,
+
+      {name}
+      {school} | {major}, Class of {class_year}
+      {phone}
+
+  personal:
+    subject: "{school} Student Interested in {Field} at {company}"
+    body: |
+      Hi {first_name},
+
+      I hope this email finds you well.
+
+      My name is {name}, and I'm a {year_label} at {school} studying {major}. I'm reaching out because I'm really interested in {field} at {company}, and your path stood out to me right away. {connection}
+
+      I know your time is very limited, but would you be open to a quick 15 minute call?
+
+      Happy to work around your schedule, but do any of the below time slots work over the next two weeks?
+
+      {availability}
+
+      I've attached my resume in case you'd like more on my background. Thank you for considering it.
+
+      Best,
+      {name}
+      {school} | {major}, Class of {class_year}
+      {phone}
+
+# ── Companies and their work-email formats ───────────────────
+# patterns (tried in order): first.last, flast, firstlast, f.last, first_last, first-last, first, lastf
+# confidence: high = widely confirmed; medium = worth double-checking (e.g. with a free Apollo/Hunter lookup)
+# Add any company you like. People at companies not listed here still work: Claude asks you or
+# researches the format.
+companies:
+  - {name: Goldman Sachs,       aliases: [GS, Goldman],             email_domain: gs.com,            patterns: [first.last], confidence: high}
+  - {name: Morgan Stanley,      aliases: [MS],                      email_domain: morganstanley.com, patterns: [first.last], confidence: high}
+  - {name: J.P. Morgan,         aliases: [JPMorgan, JP Morgan, JPM, JPMorgan Chase], email_domain: jpmorgan.com, patterns: [first.last], confidence: high}
+  - {name: Bank of America,     aliases: [BofA, BofA Securities, BAML], email_domain: bofa.com,      patterns: [first.last], confidence: high}
+  - {name: Citi,                aliases: [Citigroup, Citibank],     email_domain: citi.com,          patterns: [first.last], confidence: high}
+  - {name: Barclays,            aliases: [],                        email_domain: barclays.com,      patterns: [first.last], confidence: high}
+  - {name: Deutsche Bank,       aliases: [DB],                      email_domain: db.com,            patterns: [first-last, first.last], confidence: medium}
+  - {name: UBS,                 aliases: [],                        email_domain: ubs.com,           patterns: [first.last], confidence: medium}
+  - {name: Wells Fargo,         aliases: [],                        email_domain: wellsfargo.com,    patterns: [first.last], confidence: medium}
+  - {name: RBC Capital Markets, aliases: [RBC],                     email_domain: rbccm.com,         patterns: [first.last], confidence: high}
+  - {name: Jefferies,           aliases: [],                        email_domain: jefferies.com,     patterns: [flast], confidence: medium}
+  - {name: Evercore,            aliases: [],                        email_domain: evercore.com,      patterns: [first.last], confidence: high}
+  - {name: Lazard,              aliases: [],                        email_domain: lazard.com,        patterns: [first.last], confidence: high}
+  - {name: Houlihan Lokey,      aliases: [HL],                      email_domain: hl.com,            patterns: [flast], confidence: high}
+  - {name: Moelis & Company,    aliases: [Moelis],                  email_domain: moelis.com,        patterns: [first.last], confidence: high}
+  - {name: PJT Partners,        aliases: [PJT],                     email_domain: pjtpartners.com,   patterns: [first.last], confidence: high}
+  - {name: Centerview Partners, aliases: [Centerview],              email_domain: centerview.com,    patterns: [flast], confidence: medium}
+  - {name: Raine,               aliases: [The Raine Group],         email_domain: raine.com,         patterns: [flast], confidence: medium}

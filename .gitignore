@@ -1,0 +1,14 @@
+# Personal data: never commit
+config.yaml
+outreach.db
+batches/
+review/
+.browser_profile/
+*.pdf
+*.docx
+
+# Python / OS
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
